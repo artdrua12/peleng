@@ -20,7 +20,8 @@
       </div>
 
       <div class="item__content">
-        <slot>{{ item.body }}</slot>
+        <img :src="getImageUrl(index + 1, 'jpg')" alt="cat" />
+        <p>{{ item.body }}</p>
       </div>
     </div>
   </div>
@@ -49,22 +50,13 @@ document.onscroll = () => {
         icons.value.at(-1).getBoundingClientRect().top + window.scrollY;
       const currentItem = current.top + window.scrollY;
 
+      //отрисовка красной линии скрола
       if (currentItem + 10 > lastItem) {
         scrolls.value.at(0).style.height = lastItem - firstItem + "px";
       } else {
-        const diferent =
-        viewportHalfHeight - icons.value[0].getBoundingClientRect().bottom;
-        scrolls.value[0].style.height = (diferent > 0 ? diferent : 0) + "px";
+        const diferent = viewportHalfHeight - first.bottom;
+        scrolls.value.at(0).style.height = (diferent > 0 ? diferent : 0) + "px";
       }
-      // let diferent =
-      // viewportHalfHeight - icons.value[0].getBoundingClientRect().bottom;
-
-      // console.log("l  d", current, last);
-
-      // if (currentItem.bottom + 10 > lastItem) {
-      //   diferent = icons.value.at(-1).getBoundingClientRect().bottom;
-      // }
-      // scrolls.value[0].style.height = currentItem.y + "px";
     } else {
       icon.style.backgroundColor = "var(--white)";
       icon.parentNode.previousSibling.style.color = "var(--black)";
@@ -90,6 +82,10 @@ document.onscroll = () => {
     observer.observe(content);
   });
 };
+
+function getImageUrl(name, ext) {
+  return new URL(`../assets/images/${name}.${ext}`, import.meta.url).href;
+}
 </script>
   
 <style scoped>
@@ -148,10 +144,11 @@ document.onscroll = () => {
   border-radius: 0.625rem;
   box-shadow: 0 10px 15px -3px var(--bgColor), 0 4px 6px -4px var(--bgColor);
   padding: 25px;
+  overflow: hidden;
   background-color: var(--bgColor);
   position: relative;
   order: -1;
-  transform: translateY(100px);
+  transform: translateY(150px);
   opacity: 0;
   transition: transform 0.8s, opacity 0.5s;
 }
@@ -200,10 +197,37 @@ document.onscroll = () => {
   z-index: 1;
 }
 .icon {
+  width: 40px;
   left: 1px;
   background-color: var(--white);
   border-radius: 50%;
   position: relative;
   z-index: 2;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+}
+@media (max-width: 980px) {
+  .item {
+    grid-template-columns: auto auto 1fr;
+    gap: 25px;
+  }
+  .item__icon {
+    order: 0;
+  }
+  .item__text {
+    order: 1;
+  }
+  .item__content {
+    order: 1;
+  }
+  .item::before,
+  .item::after {
+    left: 20px;
+  }
+  .item:nth-child(2n) .item__text {
+  order: 1;
+}
 }
 </style>
