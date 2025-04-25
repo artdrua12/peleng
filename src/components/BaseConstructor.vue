@@ -144,7 +144,6 @@ function getImageUrl(name, ext) {
   border-radius: 0.625rem;
   box-shadow: 0 10px 15px -3px var(--bgColor), 0 4px 6px -4px var(--bgColor);
   padding: 25px;
-  overflow: hidden;
   background-color: var(--bgColor);
   position: relative;
   order: -1;
@@ -171,15 +170,9 @@ function getImageUrl(name, ext) {
   margin-top: -12px;
 }
 .item:nth-child(2n) .item__content:before {
-  content: "";
-  border: solid transparent;
-  position: absolute;
   right: 100%;
   left: -100%;
-  top: 50%;
   border-right-color: var(--bgColor);
-  border-width: 12px;
-  margin-top: -12px;
 }
 .item__scroll {
   display: flex;
@@ -227,7 +220,12 @@ img {
     left: 20px;
   }
   .item:nth-child(2n) .item__text {
-  order: 1;
-}
+    order: 1;
+  }
+  .item__content:before {
+    right: 100%;
+    left: -100%;
+    border-right-color: var(--bgColor);
+  }
 }
 </style>
