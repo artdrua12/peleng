@@ -147,6 +147,7 @@ function getImageUrl(name, ext) {
   background-color: var(--bgColor);
   position: relative;
   order: -1;
+  font-size: 1.2rem;
   transform: translateY(150px);
   opacity: 0;
   transition: transform 0.8s, opacity 0.5s;
@@ -214,6 +215,7 @@ img {
   }
   .item__content {
     order: 1;
+    font-size: 0.8rem;
   }
   .item::before,
   .item::after {
