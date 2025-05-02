@@ -147,10 +147,10 @@ function getImageUrl(name, ext) {
   background-color: var(--bgColor);
   position: relative;
   order: -1;
-  font-size: 1.2rem;
   transform: translateY(150px);
   opacity: 0;
   transition: transform 0.8s, opacity 0.5s;
+  font-size: 1.2rem;
 }
 .active {
   transform: translateY(0px);
@@ -228,6 +228,7 @@ img {
     right: 100%;
     left: -100%;
     border-right-color: var(--bgColor);
+    border-left: none;
   }
 }
 </style>
